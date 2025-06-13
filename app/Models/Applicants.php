@@ -12,6 +12,7 @@ class Applicants extends Model
 
 
     protected $table = 'applicant';
+    protected $keyType = 'string';
 
     protected $fillable = [
         'id',                    // Sesuaikan dengan kolom primary key
@@ -61,7 +62,31 @@ class Applicants extends Model
         return $this->belongsTo(Education::class, 'education_id');
     }
     public function graduateStatus()
-{
-    return $this->belongsTo(GraduatedStatus::class, 'graduate_status');
-}
+    {
+        return $this->belongsTo(GraduatedStatus::class, 'graduate_status');
+    }
+    public function screeningCv()
+    {
+        return $this->hasOne(ScreeningCv::class, 'applicant_id');
+    }
+    public function psikotest()
+    {
+        return $this->hasOne(Psikotest::class, 'applicant_id');
+    }
+    public function interviewHR()
+    {
+        return $this->hasOne(InterviewHR::class, 'applicant_id');
+    }
+    public function interviewUser()
+    {
+        return $this->hasOne(InterviewUser::class, 'applicant_id');
+    }
+    public function offering()
+    {
+        return $this->hasOne(Offering::class, 'applicant_id');
+    }
+    public function reporting()
+    {
+        return $this->hasOne(Reporting::class, 'applicant_id');
+    }
 }

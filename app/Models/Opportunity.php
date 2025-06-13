@@ -30,15 +30,18 @@ class Opportunity extends Model
     ];
 
     // Relasi
-    public function division(){
+    public function division()
+    {
         return $this->belongsTo(Division::class);
     }
 
-    public function category(){
+    public function category()
+    {
         return $this->belongsTo(Category::class);
     }
 
-    public function schema(){
+    public function schema()
+    {
         return $this->belongsTo(Schema::class);
     }
 
@@ -57,35 +60,37 @@ class Opportunity extends Model
     {
         return $this->hasMany(Applicants::class, 'id_opportunity');
     }
-    
+    public function Reporting()
+    {
+        return $this->hasOne(Reporting::class, 'id_opportunity');
+    }
 
-public function mount()
-{
-    // Inisialisasi applicants sebagai koleksi kosong
-    $this->applicants = collect();
-}
+    public function mount()
+    {
+        // Inisialisasi applicants sebagai koleksi kosong
+        $this->applicants = collect();
+    }
 
-// Fungsi untuk memilih job dan mengambil data applicant berdasarkan id_opportunity
-public function render()
-{
-    $opportunities = Opportunity::where('name', 'like', '%' . $this->search . '%')
-        ->orderBy('created_at', 'DESC')
-        ->paginate(6);
+    // Fungsi untuk memilih job dan mengambil data applicant berdasarkan id_opportunity
+    public function render()
+    {
+        $opportunities = Opportunity::where('name', 'like', '%' . $this->search . '%')
+            ->orderBy('created_at', 'DESC')
+            ->paginate(6);
 
-    return view('livewire.opportunity-menu', [
-        'opportunities' => $opportunities,
-        'applicants' => $this->applicants,
-    ]);
-}
+        return view('livewire.opportunity-menu', [
+            'opportunities' => $opportunities,
+            'applicants' => $this->applicants,
+        ]);
+    }
 
-public function selectJob($jobId)
-{
-    $this->selectedJob = Opportunity::find($jobId);
-    $this->applicants = $this->selectedJob 
-        ? Applicants::where('id_opportunity', $jobId)->get()
-        : collect();
-    
-    $this->resetPage();
-}
+    public function selectJob($jobId)
+    {
+        $this->selectedJob = Opportunity::find($jobId);
+        $this->applicants = $this->selectedJob
+            ? Applicants::where('id_opportunity', $jobId)->get()
+            : collect();
 
+        $this->resetPage();
+    }
 }

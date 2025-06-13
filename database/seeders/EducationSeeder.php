@@ -15,9 +15,6 @@ class EducationSeeder extends Seeder
     {
         $educations = [
             ['name' => 'Tidak Bersekolah'],
-            ['name' => 'SD'],
-            ['name' => 'SMP'],
-            ['name' => 'SMA'],
             ['name' => 'D3'],
             ['name' => 'D4'],
             ['name' => 'S1'],

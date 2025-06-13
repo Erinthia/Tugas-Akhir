@@ -3,7 +3,6 @@
 namespace App\Livewire;
 
 use App\Models\Applicants;
-use App\Models\ApplicantsModel;
 use App\Models\Schema;
 use Livewire\Component;
 use App\Models\Category;
@@ -11,7 +10,6 @@ use App\Models\Division;
 use App\Models\Opportunity;
 use Livewire\WithPagination;
 use Livewire\WithoutUrlPagination;
-use App\Models\Applicant;
 
 class OpportunityMenu extends Component
 {
@@ -98,9 +96,6 @@ class OpportunityMenu extends Component
         $this->isInformation = false;
         $this->isUpdate = false;
     
-        // Debug output untuk memeriksa applicants
-    
-        // Debug output untuk memeriksa applicants
     }
     
 

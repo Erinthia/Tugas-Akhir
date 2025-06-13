@@ -8,8 +8,6 @@
             <h2 class="section-title">Category List</h2>
             <p class="section-lead">In this section you can manage category data such as adding, changing and deleting.
             </p>
-            <p class="section-lead">In this section you can manage category data such as adding, changing and deleting.
-            </p>
             <div class="card">
                 <div class="card-body">
                     <div class="row">
@@ -18,8 +16,6 @@
 
                         </div>
                         <div class="col-4">
-                            <input wire:model.live.debounce.250ms="search" type="text" class="form-control"
-                                id="search" placeholder="Search Category">
                             <input wire:model.live.debounce.250ms="search" type="text" class="form-control"
                                 id="search" placeholder="Search Category">
                         </div>
@@ -51,12 +47,6 @@
                                 <th scope="col">Description</th>
                                 <th scope="col">Action</th>
                             </tr>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Description</th>
-                                <th scope="col">Action</th>
-                            </tr>
                         </thead>
                         <tbody>
                             @foreach ($categories as $index => $category)
@@ -69,7 +59,7 @@
                                             <a href="#" wire:click.prevent="update({{ $category->id }})"
                                                 class="btn btn-icon btn-warning"><i
                                                     class="fas fa-exclamation-triangle"></i></a>
-                                            <a href="#" wire:click.prevent="delete({{ $category->id }})"
+                                            <a href="#" wire:click.prevent="destroy({{ $category->id }})"
                                                 wire:confirm="Are you sure?" class="btn btn-icon btn-danger"><i
                                                     class="fas fa-times"></i></a>
                                         </div>
@@ -78,7 +68,6 @@
                             @endforeach
                         </tbody>
                     </table>
-                    {{ $categories->links() }}
                     {{ $categories->links() }}
                 </div>
             </div>
@@ -127,9 +116,9 @@
         </div>
     @endif
     @if ($isUpdate)
-                <div class="section-header">
-                    <h1>Update Category</h1>
-                </div>
+        <div class="section-header">
+            <h1>Update Category</h1>
+        </div>
 
         <div class="section-body">
             <h2 class="section-title">Create Category</h2>

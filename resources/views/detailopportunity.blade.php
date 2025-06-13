@@ -157,6 +157,7 @@
                                         @error('cv_file')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
+                                        <p class="text-white">*Only PDF files are allowed for CV | max 2048 kb</p>
                                     </div>
                                     <div class="mb-4">
                                         <p class="text-white">Gender</p>

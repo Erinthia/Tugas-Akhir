@@ -160,13 +160,13 @@
                                                 <div class="card-body"> <!-- Isi card -->
                                                     <h5>{{ $applicant->fullname }}</h5>
                                                     <p><strong>Email:</strong> {{ $applicant->email }}</p>
-                                                    <p><strong>Opportunity:</strong> {{ $applicant->id_opportunity }}
-                                                    </p>
-                                                    <p><strong>Domisili:</strong> {{ $applicant->address }}
+                                                    <p><strong>Opportunity:</strong>
+                                                        {{ $applicant->opportunity->name ?? 'N/A' }}</p>
+                                                    <p><strong>Domisili:</strong> {{ $applicant->domicile_address }}
                                                     </p>
                                                     <!-- Tombol untuk melihat detail applicant -->
                                                     <a href="#"
-                                                        wire:click="selectApplicant({{ $applicant->id }})"
+                                                        wire:click="selectApplicant('{{ $applicant->id }}')"
                                                         class="btn btn-outline-info btn-block">
                                                         <i class="fas fa-info-circle"></i> Details
                                                     </a>

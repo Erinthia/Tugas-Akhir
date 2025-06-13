@@ -96,6 +96,18 @@
                             @enderror
                         </div>
                         <div class="form-group">
+                            <label for="roles_id">Role</label>
+                            <select class="form-control" id="roles_id" wire:model="roles_id">
+                                <option value="">-- Pilih Role --</option>
+                                @foreach ($allRoles as $role)
+                                    <option value="{{ $role->id }}">{{ $role->name }}</option>
+                                @endforeach
+                            </select>
+                            @error('roles_id')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="form-group">
                             <label for="phone_number">Phone Number</label>
                             <input type="phone_number" class="form-control" id="phone_number" wire:model="phone_number">
                             @error('phone_number')
@@ -129,7 +141,6 @@
             <p class="section-lead">In this section you can update user data.</p>
             <div class="card">
                 <form wire:submit.prevent="setUpdate({{ $id }})">
-                <form wire:submit.prevent="setUpdate({{ $id }})">
                     <div class="card-body">
                         <div class="form-group">
                             <label for="name">Name</label>
@@ -149,6 +160,18 @@
                             @enderror
                         </div>
                         <div class="form-group">
+                            <label for="roles_id">Role</label>
+                            <select class="form-control" id="roles_id" wire:model="roles_id">
+                                <option value="">-- Pilih Role --</option>
+                                @foreach ($allRoles as $role)
+                                    <option value="{{ $role->id }}">{{ $role->name }}</option>
+                                @endforeach
+                            </select>
+                            @error('roles_id')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="form-group">
                             <label for="password">Password</label>
                             <input type="password" class="form-control" id="password" wire:model="password">
                             @error('password')
@@ -156,14 +179,12 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="password">Password</label>
-                            <input type="password" class="form-control" id="password" wire:model="password">
-                            @error('password') <span class="text-danger">{{ $message }}</span> @enderror
-                        </div>
-                        <div class="form-group">
                             <label for="phone_number">Phone Number</label>
-                            <input type="tel" class="form-control" id="phone_number" wire:model="phone_number"> <!-- Changed to 'tel' -->
-                            @error('phone_number') <span class="text-danger">{{ $message }}</span> @enderror
+                            <input type="tel" class="form-control" id="phone_number" wire:model="phone_number">
+                            <!-- Changed to 'tel' -->
+                            @error('phone_number')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
                         <div class="buttons">
                             <a href="#" wire:click="back()" class="btn btn-primary">Back</a>
@@ -174,7 +195,7 @@
             </div>
         </div>
     @endif
-    
+
     @if ($isShow)
         <div class="section-header">
             <h1>Detail User</h1>
@@ -190,7 +211,7 @@
                             <p><strong>Name</strong></p>
                         </div>
                         <div class="col-6">
-                            <p>{{$name}}</p>
+                            <p>{{ $name }}</p>
                         </div>
                     </div>
                     <div class="row">
@@ -198,7 +219,7 @@
                             <p><strong>Email</strong></p>
                         </div>
                         <div class="col-6">
-                            <p>{{$email}}</p>
+                            <p>{{ $email }}</p>
                         </div>
                     </div>
                     <div class="buttons">
