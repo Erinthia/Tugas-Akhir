@@ -1,5 +1,6 @@
 <?php
 
+
 return [
 
     /*
@@ -12,6 +13,9 @@ return [
     | as required, but they're a perfect start for most applications.
     |
     */
+     'failed' => 'Incorrect email or password.',
+    'password' => 'The provided password is incorrect.',
+    'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
 
     'defaults' => [
         'guard' => env('AUTH_GUARD', 'web'),
