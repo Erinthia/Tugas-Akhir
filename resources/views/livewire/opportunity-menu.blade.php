@@ -171,7 +171,7 @@
                                         </div>
                                     @endforeach
                                 @else
-                                    <h5 style="margin-left: 30%;"><strong>No applicants found.</strong></h5>
+                                    <h6 style="margin-left: 30%;"><strong>No applicants found.</strong></h6>
                                 @endif
                             </div>
                         </div>
@@ -252,10 +252,6 @@
                                     <div class="col-4"><strong>Graduate Year:</strong></div>
                                     <div class="col-8">{{ $selectedApplicant->graduate_year }}</div>
                                 </div>
-                                {{-- <div class="row mb-3">
-                                    <div class="col-4"><strong>Information From:</strong></div>
-                                    <div class="col-8">{{ $selectedApplicant->know_opportunity_form }}</div>
-                                </div> --}}
                                 <div class="row mb-3">
                                     <div class="col-4"><strong>Portfolio:</strong></div>
                                     <div class="col-8">
@@ -300,8 +296,8 @@
                             <div class="card">
                                 <div class="card-body d-flex justify-content-center align-items-center"
                                     style="height: 100%; max-height: 585px; overflow-y: auto;">
-                                    <h5 class="text-center"><strong>Please select an applicant to see details.</strong>
-                                    </h5>
+                                    <h6 class="text-center"><strong>Please select an applicant to see details.</strong>
+                                    </h6>
                                 </div>
                             </div>
                         </div>
