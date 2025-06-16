@@ -8,6 +8,25 @@
             <h2 class="section-title">User List</h2>
             <p class="section-lead">In this section you can manage system user data such as adding, changing and
                 deleting</p>
+            @if (session()->has('success'))
+                Add commentMore actions
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{ session('success') }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <br>
+            @endif
+
+            @if (session()->has('error'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{ session('error') }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
             <div class="card">
                 <div class="card-body">
                     <div class="row">
@@ -21,17 +40,6 @@
                         </div>
                     </div>
                     <br>
-                    @if (session()->has('success'))
-                        <div class="alert alert-success alert-dismissible show fade">
-                            <div class="alert-body">
-                                <button class="close" data-dismiss="alert">
-                                    <span>×</span>
-                                </button>
-                                {{ session('success') }}
-                            </div>
-                        </div>
-                        <br>
-                    @endif
                     <table class="table table-striped">
                         <thead>
                             <tr>
@@ -53,8 +61,7 @@
                                                 class="btn btn-icon btn-primary"><i
                                                     class="fas fa-exclamation-triangle"></i></a>
                                             <a href="#" wire:click.prevent="edit({{ $user->id }})"
-                                                class="btn btn-icon btn-warning"><i
-                                                    class="fas fa-exclamation-triangle"></i></a>
+                                                class="btn btn-icon btn-warning"><i class="fas fa-edit"></i></a>
                                             <a href="#" wire:click.prevent="destroy({{ $user->id }})"
                                                 wire:confirm="Are you sure?" class="btn btn-icon btn-danger"><i
                                                     class="fas fa-times"></i></a>
