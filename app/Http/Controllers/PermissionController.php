@@ -47,7 +47,7 @@ class PermissionController extends Controller
             $permission->roles()->attach($validated['roles']);
         }
 
-        return redirect()->route('admin.permissions.index')->with('success', 'Permission created.');
+        return redirect()->route('admin.permissions.index')->with('success', 'Permission created successfully.');
     }
 
     public function show($id)
@@ -90,6 +90,6 @@ class PermissionController extends Controller
         $permission = Permission::findOrFail($id);
         $permission->delete();
 
-        return redirect()->route('admin.permissions.index')->with('success', 'Permission deleted.');
+        return redirect()->route('admin.permissions.index')->with('success', 'Permission deleted successfully.');
     }
 }
