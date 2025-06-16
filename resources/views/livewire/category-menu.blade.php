@@ -57,8 +57,7 @@
                                     <td>
                                         <div class="buttons">
                                             <a href="#" wire:click.prevent="update({{ $category->id }})"
-                                                class="btn btn-icon btn-warning"><i
-                                                    class="fas fa-exclamation-triangle"></i></a>
+                                                class="btn btn-icon btn-warning"><i class="fas fa-edit"></i></a>
                                             <a href="#" wire:click.prevent="destroy({{ $category->id }})"
                                                 wire:confirm="Are you sure?" class="btn btn-icon btn-danger"><i
                                                     class="fas fa-times"></i></a>

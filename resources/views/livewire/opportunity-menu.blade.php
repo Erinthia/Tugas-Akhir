@@ -93,10 +93,6 @@
                                 {{ $opportunity->created_at }} <br> Division : {{ $opportunity->division->name }} |
                                 Category : {{ $opportunity->category->name }} <br>Open Date :
                                 {{ $opportunity->start_date }} | Close Date : {{ $opportunity->end_date }}</p>
-                            <p></p>
-                            {{-- <div class="badges">
-                                <span class="badge badge-success">Aktif</span>
-                            </div> --}}
                         </div>
                         <div class="col-6">
                             <div class="row">
