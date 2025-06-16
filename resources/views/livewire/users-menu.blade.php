@@ -57,8 +57,7 @@
                                     <td>
                                         <div class="buttons">
                                             <a href="#" wire:click.prevent="show({{ $user->id }})"
-                                                class="btn btn-icon btn-primary"><i
-                                                    class="fas fa-exclamation-triangle"></i></a>
+                                                class="btn btn-icon btn-primary"><i class="fas fa-eye"></i></a>
                                             <a href="#" wire:click.prevent="edit({{ $user->id }})"
                                                 class="btn btn-icon btn-warning"><i class="fas fa-edit"></i></a>
                                             <a href="#" wire:click.prevent="destroy({{ $user->id }})"
