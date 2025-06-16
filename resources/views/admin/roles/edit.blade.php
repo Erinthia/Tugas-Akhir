@@ -57,7 +57,7 @@
 
                     <div class="buttons">
                         <a href="{{ route('admin.roles.index') }}" class="btn btn-primary">Back</a>
-                        <button type="submit" class="btn btn-success">Update</button>
+                        <button type="submit" class="btn btn-success">Save</button>
                     </div>
                 </form>
             </div>
