@@ -31,10 +31,6 @@
                                     <span>×</span>
                                 </button>
                                 {{ session('success') }}
-                                <button class="close" data-dismiss="alert">
-                                    <span>×</span>
-                                </button>
-                                {{ session('success') }}
                             </div>
                         </div>
                         <br>
@@ -89,16 +85,10 @@
                             @error('name')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
-                            @error('name')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="description">Description</label>
                             <textarea class="form-control" id="description" style="height: 121px;" wire:model="description"></textarea>
-                            @error('description')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
                             @error('description')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
@@ -107,8 +97,6 @@
                             <a href="#" wire:click="home()" class="btn btn-primary">Back</a>
                             <button class="submit btn btn-success">Save</button>
                         </div>
-
-
                     </div>
                 </form>
             </div>
