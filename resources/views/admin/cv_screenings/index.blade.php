@@ -136,104 +136,104 @@
                     {{ $applicants->links() }}
                 </div>
             </div>
-
         </div>
-    @endsection
-    @push('styles')
-        <style>
-            .section-header {
-                background-color: white;
-                color: rgb(59, 59, 59);
-                font-weight: bold;
-                padding: 1.1rem;
-                vertical-align: middle;
-                height: 80px;
-            }
+    </div>
+@endsection
+@push('styles')
+    <style>
+        .section-header {
+            background-color: white;
+            color: rgb(59, 59, 59);
+            font-weight: bold;
+            padding: 1.1rem;
+            vertical-align: middle;
+            height: 80px;
+        }
 
-            .section-header h1 {
-                font-size: 24px;
-                line-height: 50px;
-            }
+        .section-header h1 {
+            font-size: 24px;
+            line-height: 50px;
+        }
 
-            .section-title-lead-wrapper {
-                margin-bottom: 1.5rem;
-            }
+        .section-title-lead-wrapper {
+            margin-bottom: 1.5rem;
+        }
 
-            .section-title {
-                display: flex;
-                align-items: center;
-                margin-bottom: 0.75rem;
-                margin-top: 1rem;
-            }
+        .section-title {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+            margin-top: 1rem;
+        }
 
-            .toggle-indicator {
-                width: 28px;
-                height: 8px;
-                background-color: rgb(122, 138, 227);
-                border-radius: 7.5px;
-                margin-right: 0.5rem;
-            }
+        .toggle-indicator {
+            width: 28px;
+            height: 8px;
+            background-color: rgb(122, 138, 227);
+            border-radius: 7.5px;
+            margin-right: 0.5rem;
+        }
 
-            .section-title-text {
-                font-size: 18px;
-                font-weight: normal;
-                color: #020202;
-                margin-bottom: 0;
-            }
+        .section-title-text {
+            font-size: 18px;
+            font-weight: normal;
+            color: #020202;
+            margin-bottom: 0;
+        }
 
-            .section-lead {
-                font-size: 1rem;
-                color: #868e96;
-                margin-bottom: 0;
-                margin-left: calc(28px + 0.5rem);
-                /* Margin kiri sebesar lebar toggle + jaraknya */
-            }
+        .section-lead {
+            font-size: 1rem;
+            color: #868e96;
+            margin-bottom: 0;
+            margin-left: calc(28px + 0.5rem);
+            /* Margin kiri sebesar lebar toggle + jaraknya */
+        }
 
-            .card {
-                border: 1px solid #e0e0e0;
-                border-radius: 0.25rem;
-                box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
-            }
+        .card {
+            border: 1px solid #e0e0e0;
+            border-radius: 0.25rem;
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+        }
 
-            .table th {
-                background-color: #f8f9fa;
-                border-bottom: 1px solid #dee2e6;
-                font-weight: bold;
-                padding: 0.75rem;
-                vertical-align: middle;
-            }
+        .table th {
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #dee2e6;
+            font-weight: bold;
+            padding: 0.75rem;
+            vertical-align: middle;
+        }
 
-            .table td {
-                padding: 0.75rem;
-                vertical-align: middle;
-                border-bottom: 1px solid #e9ecef;
-            }
+        .table td {
+            padding: 0.75rem;
+            vertical-align: middle;
+            border-bottom: 1px solid #e9ecef;
+        }
 
-            .btn-primary {
-                background-color: #007bff;
-                border-color: #007bff;
-                color: #fff;
-            }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            color: #fff;
+        }
 
-            .btn-warning {
-                background-color: #ffc107;
-                border-color: #ffc107;
-                color: #212529;
-            }
+        .btn-warning {
+            background-color: #ffc107;
+            border-color: #ffc107;
+            color: #212529;
+        }
 
-            .badge {
-                border-radius: 0.25rem;
-                font-size: 0.875rem;
-                padding: 0.35em 0.65em;
-            }
-        </style>
-    @endpush
+        .badge {
+            border-radius: 0.25rem;
+            font-size: 0.875rem;
+            padding: 0.35em 0.65em;
+        }
+    </style>
+@endpush
 
-    @push('scripts')
-        <script>
-            // Auto hide alert after 3 seconds
-            setTimeout(function() {
-                $(".alert").alert('close');
-            }, 3000); // 3000 ms = 1 detik
-        </script>
-    @endpush
+@push('scripts')
+    <script>
+        // Auto hide alert after 3 seconds
+        setTimeout(function() {
+            $(".alert").alert('close');
+        }, 3000); // 3000 ms = 1 detik
+    </script>
+@endpush
