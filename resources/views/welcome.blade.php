@@ -49,7 +49,7 @@
                 </div>
                 <div class="d-none d-xl-flex flex-shirink-0">
                     <div id="phone-tada" class="d-flex align-items-center justify-content-center me-4">
-                        <a href="https://wa.me/62881082861608" target="_blank"Add commentMore actions
+                        <a href="https://wa.me/62881082861608" target="_blank"
                             class="position-relative animated tada infinite">
                             <i class="fa fa-phone-alt text-white fa-2x"></i>
                             <div class="position-absolute" style="top: -7px; left: 20px;">
@@ -61,10 +61,20 @@
                         <span class="text-white-50">Have any questions?</span>
                         <span class="text-secondary">Call: +62 881 0828 61608</span>
                     </div>
-                    {{-- <div class="d-flex align-items-center justify-content-center ms-4 ">
-                        <a href="#"><i class="bi bi-search text-white fa-2x"></i> </a>
-                    </div> --}}
-                </div>
+                    <div class="d-flex align-items-center justify-content-center ms-4 position-relative"
+                        style="z-index: 1000;">
+                        <!-- Icon search -->
+                        <a href="#" id="searchToggle">
+                            <i class="bi bi-search text-white fa-2x"></i>
+                        </a>
+
+                        <!-- Floating input -->
+                        <form id="searchForm"
+                            class="d-none position-absolute start-50 translate-middle-x mt-2 p-2 bg-white rounded shadow"
+                            style="top: 100%; width: 250px;">
+                            <input type="text" id="searchInput" class="form-control" placeholder="Cari...">
+                        </form>
+                    </div>
             </nav>
         </div>
     </div>
@@ -83,7 +93,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-7 col-md-6 col-sm-12 wow fadeIn" data-wow-delay=".5s">
+                <div id="about" class="col-lg-7 col-md-6 col-sm-12 wow fadeIn" data-wow-delay=".5s"
+                    data-keywords="about schooltech visi misi perusahaan edukasi teknologi">
                     <h5 class="text-primary">About Us</h5>
                     <h1 class="mb-4">About SchoolTech Indonesia And It's Innovative Software as a Service</h1>
                     <p>SchoolTech Indonesia merupakan sebuah perusahaan yang bergerak pada bidang Information and
@@ -101,7 +112,8 @@
     <!-- Services Start -->
     <div class="container-fluid services py-5 mb-5">
         <div class="container">
-            <div class="text-center mx-auto pb-5 wow fadeIn" data-wow-delay=".3s" style="max-width: 600px;">
+            <div id="services" class="text-center mx-auto pb-5 wow fadeIn" data-wow-delay=".3s"
+                data-keywords="services layanan client support produk" style="max-width: 600px;">
                 <h5 class="text-primary">Our Services</h5>
                 <h1>Services Built Specifically For Our Client</h1>
             </div>
@@ -185,10 +197,11 @@
     </div>
     <!-- Services End -->
 
-    <!-- Services Start -->
+    <!-- Values Start -->
     <div class="container-fluid services py-5 mb-5">
         <div class="container">
-            <div class="text-center mx-auto pb-5 wow fadeIn" data-wow-delay=".3s" style="max-width: 600px;">
+            <div id="values" class="text-center mx-auto pb-5 wow fadeIn" data-wow-delay=".3s"
+                data-keywords="value nilai budaya integritas" style="max-width: 600px;">
                 <h5 class="text-primary">Our Value</h5>
                 <h1>Our Corporate Value to Implement in Staff</h1>
             </div>
@@ -238,7 +251,8 @@
     <!-- Project Start -->
     <div class="container-fluid project py-5 mb-5">
         <div class="container">
-            <div class="text-center mx-auto pb-5 wow fadeIn" data-wow-delay=".3s" style="max-width: 600px;">
+            <div id="opportunity" class="text-center mx-auto pb-5 wow fadeIn" data-wow-delay=".3s"
+                data-keywords="opportunity peluang karir rekrutmen" style="max-width: 600px;">
                 <h5 class="text-primary">Our Opportunity</h5>
                 <h1>Join to Our Team!</h1>
             </div>
@@ -269,7 +283,8 @@
     <!-- Team Start -->
     <div class="container-fluid py-5 mb-5 team">
         <div class="container">
-            <div class="text-center mx-auto pb-5 wow fadeIn" data-wow-delay=".3s" style="max-width: 600px;">
+            <div id="team" class="text-center mx-auto pb-5 wow fadeIn" data-wow-delay=".3s"
+                data-keywords="team tim kerja kolaborasi" style="max-width: 600px;">
                 <h5 class="text-primary">Our Team</h5>
                 <h1>Meet our expert Team</h1>
             </div>
@@ -396,7 +411,7 @@
                 <div class="col-lg-3 col-md-6">
 
                 </div>
-                <div class="col-lg-3 col-md-6">
+                <div id="contact" class="col-lg-3 col-md-6" data-keywords="contact hubungi email telepon">
                     <a href="#" class="h3 text-secondary">Contact Us</a>
                     <div class="text-white mt-4 d-flex flex-column contact-link">
                         <a href="#" class="pb-3 text-light border-bottom border-primary"><i
@@ -439,6 +454,48 @@
     <script src="../lib/easing/easing.min.js"></script>
     <script src="../lib/waypoints/waypoints.min.js"></script>
     <script src="../lib/owlcarousel/owl.carousel.min.js"></script>
+
+    <script>
+        const toggle = document.getElementById('searchToggle');
+        const form = document.getElementById('searchForm');
+        const input = document.getElementById('searchInput');
+        const items = document.querySelectorAll('[data-keywords]');
+
+        toggle.addEventListener('click', function(e) {
+            e.preventDefault();
+            form.classList.toggle('d-none');
+            if (!form.classList.contains('d-none')) input.focus();
+        });
+
+        document.addEventListener('click', function(e) {
+            if (!form.contains(e.target) && !toggle.contains(e.target)) {
+                form.classList.add('d-none');
+            }
+        });
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const query = input.value.toLowerCase().trim();
+            let found = false;
+
+            items.forEach(item => {
+                const keywords = item.getAttribute('data-keywords') || '';
+                if (!found && keywords.includes(query)) {
+                    item.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    form.classList.add('d-none');
+                    found = true;
+                }
+            });
+
+            if (!found) {
+                alert('Bagian tidak ditemukan!');
+            }
+        });
+    </script>
 
     <!-- Template Javascript -->
     <script src="../js/main.js"></script>
