@@ -33,7 +33,7 @@
 <body>
 
     <!-- Navbar Start -->
-    <div class="container-fluid bg-primary">
+    <div class="container-fluid bg-primary sticky-top">
         <div class="container">
             <nav class="navbar navbar-dark navbar-expand-lg py-0">
                 <a href="index.html" class="navbar-brand">
@@ -482,9 +482,11 @@
             items.forEach(item => {
                 const keywords = item.getAttribute('data-keywords') || '';
                 if (!found && keywords.includes(query)) {
-                    item.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
+                    const navbarHeight = 120;
+                    const itemTop = item.getBoundingClientRect().top + window.scrollY;
+                    window.scrollTo({
+                        top: itemTop - navbarHeight,
+                        behavior: 'smooth'
                     });
                     form.classList.add('d-none');
                     found = true;
