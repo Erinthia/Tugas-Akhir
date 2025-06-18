@@ -124,9 +124,12 @@
                                     <a href="#" wire:click.prevent="update('{{ $opportunity->id }}')"
                                         class="btn btn-sm btn-block btn-outline-warning icon-left"><i
                                             class="far fa-edit"></i> Update</a>
-                                    <a href="#" wire:click.prevent="destroy('{{ $opportunity->id }}')"
-                                        class="btn btn-sm btn-block btn-outline-danger icon-left"><i
-                                            class="fas fa-times"></i> Delete</a>
+                                    <a href="#"
+                                        onclick="if(confirm('Are you sure?')) @this.call('destroy', '{{ $opportunity->id }}')"
+                                        class="btn btn-sm btn-block btn-outline-danger icon-left">
+                                        <i class="fas fa-times"></i> Delete
+                                    </a>
+
                                 </div>
                             </div>
                         </div>
