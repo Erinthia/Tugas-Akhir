@@ -399,9 +399,11 @@
                         mendukung transformasi digital. Dengan layanan unggulan kami, sekolah dapat mempercepat
                         digitalisasi secara efisien dan optimal.</p>
                     <div class="d-flex hightech-link">
-                        <a href="" class="btn-light nav-fill btn btn-square rounded-circle me-2"><i
+                        <a href="https://www.instagram.com/schooltechid?igsh=YmVmMzVrNjk5Mnp5"
+                            class="btn-light nav-fill btn btn-square rounded-circle me-2"><i
                                 class="fab fa-instagram text-primary"></i></a>
-                        <a href="" class="btn-light nav-fill btn btn-square rounded-circle me-0"><i
+                        <a href="https://www.linkedin.com/company/schooltechid/"
+                            class="btn-light nav-fill btn btn-square rounded-circle me-0"><i
                                 class="fab fa-linkedin-in text-primary"></i></a>
                     </div>
                 </div>
@@ -414,12 +416,14 @@
                 <div id="contact" class="col-lg-3 col-md-6" data-keywords="contact hubungi email telepon">
                     <a href="#" class="h3 text-secondary">Contact Us</a>
                     <div class="text-white mt-4 d-flex flex-column contact-link">
-                        <a href="#" class="pb-3 text-light border-bottom border-primary"><i
+                        <a href="https://maps.app.goo.gl/tUABmG4PxVnEex1F6?g_st=aw"
+                            class="pb-3 text-light border-bottom border-primary"><i
                                 class="fas fa-map-marker-alt text-secondary me-2"></i> Jl. Gunung Jati RT. 022 RW. 005
                             Desa Pandan Landung. Kecamatan Wagir. Kabupaten Malang</a>
-                        <a href="#" class="py-3 text-light border-bottom border-primary"><i
+                        <a href="https://wa.me/62881082861608" class="py-3 text-light border-bottom border-primary"><i
                                 class="fas fa-phone-alt text-secondary me-2"></i> +62 881 0828 61608</a>
-                        <a href="#" class="py-3 text-light border-bottom border-primary"><i
+                        <a href="mailto:admin@schooltechindonesia.com"
+                            class="py-3 text-light border-bottom border-primary"><i
                                 class="fas fa-envelope text-secondary me-2"></i> admin@schooltechindonesia.com </a>
                     </div>
                 </div>
