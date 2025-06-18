@@ -126,7 +126,7 @@ class PsikotestController extends Controller
         // --- Logika Validasi Nilai Default ---
         // 1. Cek jika decision_id masih default (ID 1)
         if ($request->decision_id == 1) {
-            return redirect()->back()->with('error', 'Keputusan belum dipilih. Silakan pilih keputusan selain default.');
+            return redirect()->back()->with('error', 'Decision has not been selected. Please select a decision other than the default.');
         }
 
         // 2. Jika decision_id BUKAN 1 (yaitu 2, 3, atau 4),
@@ -135,7 +135,7 @@ class PsikotestController extends Controller
         $requestedNotes = trim($request->notes); // Hapus spasi di awal/akhir catatan
 
         if ($requestedScore === 0 || $requestedNotes === '-') {
-            return redirect()->back()->with('error', 'Skor atau Catatan masih berisi nilai default. Harap isi data lengkap.');
+            return redirect()->back()->with('error', 'Score or Notes still contains default values. Please fill in the complete data.');
         }
 
 
@@ -158,7 +158,7 @@ class PsikotestController extends Controller
             Offering::where('applicant_id', $psikotest->applicant_id)->delete();
         }
 
-        return redirect()->route('admin.psikotests.index')->with('success', 'Psikotest berhasil diperbarui.');
+        return redirect()->route('admin.psikotests.index')->with('success', 'Psikotest Updated Successfully.');
     }
 
     /**
@@ -174,17 +174,17 @@ class PsikotestController extends Controller
 
         // Pastikan ada data psikotest dan keputusannya
         if (!$psikotest || !$psikotest->decision) {
-            return redirect()->back()->with('error', 'Data psikotest belum lengkap.');
+            return redirect()->back()->with('error', 'Psikotest data is incomplete.');
         }
 
         // Cek jika notifikasi sudah pernah dikirim untuk keputusan saat ini
         if ($psikotest->notification_sent) {
-            return redirect()->back()->with('error', 'Notifikasi sudah pernah dikirim untuk keputusan ini.');
+            return redirect()->back()->with('error', 'Notifications have already been sent for this applicant.');
         }
 
         // Hanya ID 2 (Disarankan/Lolos) dan 4 (Tidak Disarankan/Gagal) yang boleh kirim notifikasi
         if (!in_array($psikotest->decision_id, [2, 3, 4])) {
-            return redirect()->back()->with('error', 'Keputusan ini tidak dapat dikirimi notifikasi.');
+            return redirect()->back()->with('error', 'Notifications have already been sent for this applicant and are final. Resubmissions are not permitted.');
         }
 
         // Validasi skor dan catatan untuk keputusan "Disarankan", "Netral", dan "Tidak Disarankan"
@@ -193,7 +193,7 @@ class PsikotestController extends Controller
 
         // Jika keputusan adalah 2, 3, atau 4, skor dan catatan tidak boleh default (0 atau -)
         if (($psikotest->decision_id == 2 || $psikotest->decision_id == 3 || $psikotest->decision_id == 4) && ($score === 0 || $notes === '-')) {
-            return redirect()->back()->with('error', 'Skor dan catatan wajib diisi untuk keputusan ini.');
+            return redirect()->back()->with('error', 'Scores and notes are required for this decision.');
         }
         // --- Tentukan string hasil untuk email ---
         $emailResultString = '';
@@ -216,10 +216,10 @@ class PsikotestController extends Controller
             $psikotest->notification_sent = true;
             $psikotest->save();
 
-            return redirect()->back()->with('success', 'Notifikasi berhasil dikirim.');
+            return redirect()->back()->with('success', 'Notification sent successfully.');
         } catch (\Exception $e) {
-            Log::error('Gagal mengirim notifikasi email untuk applicant_id: ' . $applicant->id . ' - ' . $e->getMessage());
-            return redirect()->back()->with('error', 'Gagal mengirim notifikasi. Silakan coba lagi.');
+            Log::error('Failed to send custom info email to applicant_id: ' . $applicant->id . ' - ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Failed to send notification. Please try again.');
         }
     }
     public function showCustomEmailForm($id)
@@ -234,8 +234,8 @@ class PsikotestController extends Controller
 
         return view('admin.psikotests.custom_email_form', compact('applicant'));
     }
-    /**
-     * Mengirim notifikasi hasil CV Screening.
+  /**
+     * Mengirim notifikasi hasil Psikotest.
      *
      * @param  string  $id ID Pelamar
      * @return \Illuminate\Http\RedirectResponse

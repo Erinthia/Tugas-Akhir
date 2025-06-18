@@ -118,7 +118,7 @@ class InterviewHRController extends Controller
         // --- Logika Validasi Nilai Default ---
         // 1. Cek jika decision_id masih default (ID 1)
         if ($request->decision_id == 1) {
-            return redirect()->back()->with('error', 'Keputusan belum dipilih. Silakan pilih keputusan selain default.');
+            return redirect()->back()->with('error', 'Decision has not been selected. Please select a decision other than the default.');
         }
 
         // 2. Jika decision_id BUKAN 1 (yaitu 2, 3, atau 4),
@@ -128,7 +128,7 @@ class InterviewHRController extends Controller
         $requestedLocation = trim($request->location);
 
         if ($requestedScore === 0 || $requestedNotes === '-' || $requestedLocation === '-') {
-            return redirect()->back()->with('error', 'Skor atau Catatan masih berisi nilai default. Harap isi data lengkap.');
+            return redirect()->back()->with('error', 'Score or Notes still contains default values. Please fill in the complete data.');
         }
         // Logika untuk notifikasi_terkirim:
         // Jika decision_id berubah DAN keputusan baru adalah 'Disarankan' (2) atau 'Tidak Disarankan' (4),
@@ -147,7 +147,7 @@ class InterviewHRController extends Controller
             InterviewUser::where('applicant_id', $InterviewHR->applicant_id)->delete();
             Offering::where('applicant_id', $InterviewHR->applicant_id)->delete();
         }
-        return redirect()->route('admin.interview_hr.index')->with('success', 'InterviewHR berhasil diperbarui');
+        return redirect()->route('admin.interview_hr.index')->with('success', 'HR Interview Updated Successfully');
     }
     /**
      * Mengirim notifikasi hasil Psikotest.
@@ -162,17 +162,17 @@ class InterviewHRController extends Controller
 
         // Pastikan ada data psikotest dan keputusannya
         if (!$InterviewHR || !$InterviewHR->decision) {
-            return redirect()->back()->with('error', 'Data psikotest belum lengkap.');
+            return redirect()->back()->with('error', 'HR Interview data is incomplete.');
         }
 
         // Cek jika notifikasi sudah pernah dikirim untuk keputusan saat ini
         if ($InterviewHR->notification_sent) {
-            return redirect()->back()->with('error', 'Notifikasi sudah pernah dikirim untuk keputusan ini.');
+            return redirect()->back()->with('error', 'Notifications have already been sent for this applicant.');
         }
 
         // Hanya ID 2 (Disarankan/Lolos) dan 4 (Tidak Disarankan/Gagal) yang boleh kirim notifikasi
         if (!in_array($InterviewHR->decision_id, [2, 3, 4])) {
-            return redirect()->back()->with('error', 'Keputusan ini tidak dapat dikirimi notifikasi.');
+            return redirect()->back()->with('error', 'Notifications have already been sent for this applicant and are final. Resubmissions are not permitted.');
         }
 
         // Validasi skor dan catatan untuk keputusan "Disarankan", "Netral", dan "Tidak Disarankan"
@@ -182,7 +182,7 @@ class InterviewHRController extends Controller
 
         // Jika keputusan adalah 2, 3, atau 4, skor dan catatan tidak boleh default (0 atau -) 
         if (($InterviewHR->decision_id == 2 || $InterviewHR->decision_id == 3 || $InterviewHR->decision_id == 4) && ($score === 0 || $notes === '-' || $location === '-')) {
-            return redirect()->back()->with('error', 'Skor dan catatan wajib diisi untuk keputusan ini.');
+            return redirect()->back()->with('error', 'Scores and notes are required for this decision.');
         }
         // --- Tentukan string hasil untuk email ---
         $emailResultString = '';
@@ -205,10 +205,10 @@ class InterviewHRController extends Controller
             $InterviewHR->notification_sent = true;
             $InterviewHR->save();
 
-            return redirect()->back()->with('success', 'Notifikasi berhasil dikirim.');
+            return redirect()->back()->with('success', 'Notification sent successfully.');
         } catch (\Exception $e) {
-            Log::error('Gagal mengirim notifikasi email untuk applicant_id: ' . $applicant->id . ' - ' . $e->getMessage());
-            return redirect()->back()->with('error', 'Gagal mengirim notifikasi. Silakan coba lagi.');
+            Log::error('Failed to send email notification for applicant_id: ' . $applicant->id . ' - ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Failed to send notification. Please try again.');
         }
     }
     public function showCustomEmailForm($id)

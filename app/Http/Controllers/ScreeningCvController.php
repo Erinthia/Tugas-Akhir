@@ -87,7 +87,7 @@ class ScreeningCvController extends Controller
         // --- Logika Validasi Nilai Default ---
         // 1. Cek jika decision_id masih default (ID 1)
         if ($request->decision_id == 1) {
-            return redirect()->back()->with('error', 'Keputusan belum dipilih. Silakan pilih keputusan selain default.');
+            return redirect()->back()->with('error', 'Decision has not been selected. Please select a decision other than the default.');
         }
 
         // 2. Jika decision_id BUKAN 1 (yaitu 2, 3, atau 4),
@@ -96,7 +96,7 @@ class ScreeningCvController extends Controller
         $requestedNotes = trim($request->notes); // Hapus spasi di awal/akhir catatan
 
         if ($requestedScore === 0 || $requestedNotes === '-') {
-            return redirect()->back()->with('error', 'Skor atau Catatan masih berisi nilai default. Harap isi data lengkap.');
+            return redirect()->back()->with('error', 'Score or Notes still contains default values. Please fill in the complete data.');
         }
 
         // Logika untuk notifikasi_terkirim:
@@ -122,7 +122,7 @@ class ScreeningCvController extends Controller
             Offering::where('applicant_id', $ScreeningCv->applicant_id)->delete();
         }
 
-        return redirect()->route('admin.cv_screenings.index')->with('success', 'Data CV Screening berhasil diperbarui.');
+        return redirect()->route('admin.cv_screenings.index')->with('success', 'Cv Screening Updated Successfully.');
     }
 
     /**
@@ -163,16 +163,16 @@ class ScreeningCvController extends Controller
 
         // Pastikan ada data screening dan keputusan
         if (! $ScreeningCv || ! $ScreeningCv->decision) {
-            return redirect()->back()->with('error', 'Data screening belum lengkap.');
+            return redirect()->back()->with('error', 'CV Screening data is incomplete.');
         }
 
         // Hanya ID 2 (Disarankan) dan 4 (Tidak Disarankan) yang boleh kirim notifikasi
         if (!in_array($ScreeningCv->decision_id, [2, 3, 4])) {
-            return redirect()->back()->with('error', 'Keputusan ini tidak dapat dikirimi notifikasi.');
+            return redirect()->back()->with('error', 'Notifications have already been sent for this applicant and are final. Resubmissions are not permitted..');
         }
         // Cek jika notifikasi sudah pernah dikirim untuk keputusan saat ini
         if ($ScreeningCv->notification_sent) {
-            return redirect()->back()->with('error', 'Notifikasi sudah pernah dikirim untuk keputusan ini.');
+            return redirect()->back()->with('error', 'Notifications have already been sent for this applicant.');
         }
 
 
@@ -197,10 +197,10 @@ class ScreeningCvController extends Controller
             $ScreeningCv->notification_sent = true;
             $ScreeningCv->save();
 
-            return redirect()->back()->with('success', 'Notifikasi berhasil dikirim.');
+            return redirect()->back()->with('success', 'Notification sent successfully.');
         } catch (\Exception $e) {
-            Log::error('Gagal mengirim notifikasi email untuk applicant_id: ' . $applicant->id . ' - ' . $e->getMessage());
-            return redirect()->back()->with('error', 'Gagal mengirim notifikasi. Silakan coba lagi.');
+            Log::error('Failed to send email notification for applicant_id: ' . $applicant->id . ' - ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Failed to send notification. Please try again.');
         }
     }
     public function showCustomEmailForm($id)

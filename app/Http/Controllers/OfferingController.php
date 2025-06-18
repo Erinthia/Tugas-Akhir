@@ -116,7 +116,7 @@ class OfferingController extends Controller
         // --- Logika Validasi Nilai Default ---
         // 1. Cek jika decision_id masih default (ID 1)
         if ($request->decision_id == 1) {
-            return redirect()->back()->with('error', 'Keputusan belum dipilih. Silakan pilih keputusan selain default.');
+            return redirect()->back()->with('error', 'Decision has not been selected. Please select a decision other than the default.');
         }
 
         // 2. Jika decision_id BUKAN 1 (yaitu 2, 3, atau 4),
@@ -125,11 +125,11 @@ class OfferingController extends Controller
         $requestedNotes = trim($request->notes); // Hapus spasi di awal/akhir catatan
 
         if ($requestedScore === 0 || $requestedNotes === '-') {
-            return redirect()->back()->with('error', 'Skor atau Catatan masih berisi nilai default. Harap isi data lengkap.');
+            return redirect()->back()->with('error', 'Score or Notes still contains default values. Please fill in the complete data.');
         }
 
         $Offering->save();
-        return redirect()->route('admin.offerings.index')->with('success', 'Offering berhasil diperbarui');
+        return redirect()->route('admin.offerings.index')->with('success', 'Offering Updated Successully');
     }
     /**
      * Mengirim notifikasi hasil CV Screening.
@@ -143,7 +143,7 @@ class OfferingController extends Controller
         $Offering = $applicant->Offering;
 
         if (!$Offering || !$Offering->benefit || !$Offering->selection_result || !$Offering->deadline_offering || !$Offering->offering_result) {
-            return redirect()->back()->with('error', 'Data offering belum lengkap.');
+            return redirect()->back()->with('error', 'Offering data is incomplete.');
         }
 
         // Anggap semua data offering valid, maka dianggap "lolos"
@@ -151,6 +151,6 @@ class OfferingController extends Controller
 
         Mail::to($applicant->email)->send(new OfferingResultMail($applicant, $result));
 
-        return redirect()->back()->with('success', 'Notifikasi berhasil dikirim.');
+        return redirect()->back()->with('success', 'Notification sent successfully.');
     }
 }

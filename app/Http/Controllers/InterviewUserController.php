@@ -122,7 +122,7 @@ class InterviewUserController extends Controller
         // --- Logika Validasi Nilai Default ---
         // 1. Cek jika decision_id masih default (ID 1)
         if ($request->decision_id == 1) {
-            return redirect()->back()->with('error', 'Keputusan belum dipilih. Silakan pilih keputusan selain default.');
+            return redirect()->back()->with('error', 'Decision has not been selected. Please select a decision other than the default.');
         }
 
         // 2. Jika decision_id BUKAN 1 (yaitu 2, 3, atau 4),
@@ -132,7 +132,7 @@ class InterviewUserController extends Controller
         $requestedLocation = trim($request->location);
 
         if ($requestedScore === 0 || $requestedNotes === '-' || $requestedLocation === '-') {
-            return redirect()->back()->with('error', 'Skor atau Catatan masih berisi nilai default. Harap isi data lengkap.');
+            return redirect()->back()->with('error', 'Score or Notes still contains default values. Please fill in the complete data.');
         }
 
 
@@ -152,7 +152,7 @@ class InterviewUserController extends Controller
             // Hapus data terkait di tabel lain
             Offering::where('applicant_id', $InterviewUser->applicant_id)->delete();
         }
-        return redirect()->route('admin.interview_user.index')->with('success', 'InterviewUser berhasil diperbarui');
+        return redirect()->route('admin.interview_user.index')->with('success', 'User Interview Updated Successfully');
     }
     /**
      * Mengirim notifikasi hasil Psikotest.
@@ -167,17 +167,17 @@ class InterviewUserController extends Controller
 
         // Pastikan ada data psikotest dan keputusannya
         if (!$InterviewUser || !$InterviewUser->decision) {
-            return redirect()->back()->with('error', 'Data psikotest belum lengkap.');
+            return redirect()->back()->with('error', 'User Interview data is incomplete');
         }
 
         // Cek jika notifikasi sudah pernah dikirim untuk keputusan saat ini
         if ($InterviewUser->notification_sent) {
-            return redirect()->back()->with('error', 'Notifikasi sudah pernah dikirim untuk keputusan ini.');
+            return redirect()->back()->with('error', 'Notifications have already been sent for this applicant.');
         }
 
         // Hanya ID 2 (Disarankan/Lolos) dan 4 (Tidak Disarankan/Gagal) yang boleh kirim notifikasi
         if (!in_array($InterviewUser->decision_id, [2, 3, 4])) {
-            return redirect()->back()->with('error', 'Keputusan ini tidak dapat dikirimi notifikasi.');
+            return redirect()->back()->with('error', 'Notifications have already been sent for this applicant and are final. Resubmissions are not permitted.');
         }
 
 
@@ -188,7 +188,7 @@ class InterviewUserController extends Controller
 
         // Jika keputusan adalah 2, 3, atau 4, skor dan catatan tidak boleh default (0 atau -)
         if (($InterviewUser->decision_id == 2 || $InterviewUser->decision_id == 3 || $InterviewUser->decision_id == 4) && ($score === 0 || $notes === '-' || $location === '-')) {
-            return redirect()->back()->with('error', 'Skor dan catatan wajib diisi untuk keputusan ini.');
+            return redirect()->back()->with('error', 'Scores and notes are required for this decision.');
         }
         // --- Tentukan string hasil untuk email ---
         $emailResultString = '';
@@ -213,8 +213,8 @@ class InterviewUserController extends Controller
 
             return redirect()->back()->with('success', 'Notifikasi berhasil dikirim.');
         } catch (\Exception $e) {
-            Log::error('Gagal mengirim notifikasi email untuk applicant_id: ' . $applicant->id . ' - ' . $e->getMessage());
-            return redirect()->back()->with('error', 'Gagal mengirim notifikasi. Silakan coba lagi.');
+            Log::error('Failed to send custom info email to applicant_id ' . $applicant->id . ' - ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Failed to send notification. Please try again.');
         }
     }
 }
