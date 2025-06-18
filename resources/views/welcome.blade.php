@@ -49,7 +49,8 @@
                 </div>
                 <div class="d-none d-xl-flex flex-shirink-0">
                     <div id="phone-tada" class="d-flex align-items-center justify-content-center me-4">
-                        <a href="" class="position-relative animated tada infinite">
+                        <a href="https://wa.me/62881082861608" target="_blank"Add commentMore actions
+                            class="position-relative animated tada infinite">
                             <i class="fa fa-phone-alt text-white fa-2x"></i>
                             <div class="position-absolute" style="top: -7px; left: 20px;">
                                 <span><i class="fa fa-comment-dots text-secondary"></i></span>
