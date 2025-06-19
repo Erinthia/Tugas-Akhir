@@ -101,7 +101,7 @@
                                                 <form
                                                     action="{{ route('admin.psikotests.sendNotification', $applicant->id) }}"
                                                     method="POST"
-                                                    onsubmit="return confirm('Kirim notifikasi untuk {{ $applicant->fullname }}?');"
+                                                    onsubmit="return confirm('Send notification to {{ $applicant->fullname }}?');"
                                                     style="display:inline-block;">
                                                     @csrf
                                                     <button class="btn btn-sm btn-success" type="submit">
@@ -113,7 +113,7 @@
                                             {{-- Untuk decision gagal (id 4), selalu tampilkan Send Notification --}}
                                             <form action="{{ route('admin.psikotests.sendNotification', $applicant->id) }}"
                                                 method="POST"
-                                                onsubmit="return confirm('Kirim notifikasi untuk {{ $applicant->fullname }}?');"
+                                                onsubmit="return confirm('Send notification to {{ $applicant->fullname }}?');"
                                                 style="display:inline-block;">
                                                 @csrf
                                                 <button class="btn btn-sm btn-danger" type="submit">

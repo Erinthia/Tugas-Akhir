@@ -100,7 +100,7 @@
                                                 <form
                                                     action="{{ route('admin.cv_screenings.sendNotification', $applicant->id) }}"
                                                     method="POST" style="display:inline-block;"
-                                                    onsubmit="return confirm('Kirim notifikasi untuk {{ $applicant->fullname }}?');">
+                                                    onsubmit="return confirm('Send notification to {{ $applicant->fullname }}?');">
                                                     @csrf
                                                     <button class="btn btn-sm btn-success mb-1" type="submit">
                                                         Send Notification
@@ -112,7 +112,7 @@
                                             <form
                                                 action="{{ route('admin.cv_screenings.sendNotification', $applicant->id) }}"
                                                 method="POST" style="display:inline-block;"
-                                                onsubmit="return confirm('Kirim notifikasi untuk {{ $applicant->fullname }}?');">
+                                                onsubmit="return confirm('Send notification to {{ $applicant->fullname }}?');">
                                                 @csrf
                                                 <button class="btn btn-sm btn-danger mb-1" type="submit">
                                                     Send Notification

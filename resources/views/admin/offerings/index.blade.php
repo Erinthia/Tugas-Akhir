@@ -79,7 +79,7 @@
                                         @if (!$applicant->offering->notification_sent)
                                             <form action="{{ route('admin.offerings.sendNotification', $applicant->id) }}"
                                                 method="POST"
-                                                onsubmit="return confirm('Kirim notifikasi untuk {{ $applicant->fullname }}?');">
+                                                onsubmit="return confirm('Send notification to {{ $applicant->fullname }}?');">
                                                 @csrf
                                                 <button class="btn btn-sm btn-success" type="submit">
                                                     Send Notification

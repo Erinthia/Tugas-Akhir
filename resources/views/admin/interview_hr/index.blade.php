@@ -100,7 +100,7 @@
                                             <form
                                                 action="{{ route('admin.interview_hr.sendNotification', $applicant->id) }}"
                                                 method="POST"
-                                                onsubmit="return confirm('Kirim notifikasi untuk {{ $applicant->fullname }}?');"
+                                                onsubmit="return confirm('Send notification to {{ $applicant->fullname }}?');"
                                                 style="display:inline-block;">
                                                 @csrf
                                                 <button class="btn btn-sm btn-success" type="submit">
