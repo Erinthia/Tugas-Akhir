@@ -74,7 +74,7 @@ class ScreeningCvController extends Controller
         $request->validate([
             'score' => 'required|numeric',
             'decision_id' => 'required|exists:decisions,id',
-            'notes' => 'nullable|string',
+            'notes' => 'required|string',
         ]);
 
         $ScreeningCv = ScreeningCv::findOrFail($id);

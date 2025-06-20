@@ -103,9 +103,9 @@ class InterviewUserController extends Controller
         $request->validate([
             'score' => 'required|numeric',
             'decision_id' => 'required|exists:decisions,id',
-            'notes' => 'nullable|string',
-            'event_date' => 'nullable|date',
-            'location' => 'nullable|string'
+            'notes' => 'required|string',
+            'event_date' => 'required|date',
+            'location' => 'required|string'
         ]);
 
         // Ambil data InterviewUser yang sudah ada

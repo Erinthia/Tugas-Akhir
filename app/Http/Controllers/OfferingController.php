@@ -96,10 +96,10 @@ class OfferingController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'benefit' => 'nullable|string',
-            'selection_result' => 'nullable|string',
-            'deadline_offering' => 'nullable|date',
-            'offering_result' => 'nullable|string'
+            'benefit' => 'required|string',
+            'selection_result' => 'required|string',
+            'deadline_offering' => 'required|date',
+            'offering_result' => 'required|string'
 
         ]);
 
@@ -115,17 +115,13 @@ class OfferingController extends Controller
 
         // --- Logika Validasi Nilai Default ---
         // 1. Cek jika decision_id masih default (ID 1)
-        if ($request->decision_id == 1) {
-            return redirect()->back()->with('error', 'Decision has not been selected. Please select a decision other than the default.');
-        }
-
-        // 2. Jika decision_id BUKAN 1 (yaitu 2, 3, atau 4),
-        //    maka skor atau catatan tidak boleh berisi nilai default.
-        $requestedScore = $request->score;
-        $requestedNotes = trim($request->notes); // Hapus spasi di awal/akhir catatan
-
-        if ($requestedScore === 0 || $requestedNotes === '-') {
-            return redirect()->back()->with('error', 'Score or Notes still contains default values. Please fill in the complete data.');
+        // Cek nilai default
+        if (
+            trim($request->benefit) === '-' || trim($request->benefit) === '' ||
+            trim($request->selection_result) === '-' || trim($request->selection_result) === '' ||
+            trim($request->offering_result) === '-' || trim($request->offering_result) === ''
+        ) {
+            return redirect()->back()->with('error', 'Please change the default values of benefit, selection result, offering result before saving.');
         }
 
         $Offering->save();

@@ -108,7 +108,7 @@ class PsikotestController extends Controller
         $request->validate([
             'score' => 'required|numeric',
             'decision_id' => 'required|exists:decisions,id',
-            'notes' => 'nullable|string',
+            'notes' => 'required|string',
         ]);
 
         // Ambil data psikotest yang sudah ada
