@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\InterviewUserCustomInfoMail;
 use App\Mail\InterviewUserResultMail;
 use App\Models\Applicants;
 use App\Models\Decision;
@@ -214,6 +215,47 @@ class InterviewUserController extends Controller
             return redirect()->back()->with('success', 'Notifikasi berhasil dikirim.');
         } catch (\Exception $e) {
             Log::error('Failed to send custom info email to applicant_id ' . $applicant->id . ' - ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Failed to send notification. Please try again.');
+        }
+    }
+    public function showCustomEmailForm($id)
+    {
+        $applicant = Applicants::findOrFail($id);
+        $InterviewUser = $applicant->InterviewUser;
+
+        if ($InterviewUser->info_sent) {
+            return redirect()->route('admin.interview_user.index')
+                ->with('error', 'Additional information has already been sent for this applicant.');
+        }
+
+        return view('admin.interview_user.custom_email_form', compact('applicant'));
+    }
+
+    /**
+     * Mengirim notifikasi hasil CV Screening.
+     *
+     * @param  string  $id ID Pelamar
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function sendCustomEmail(Request $request, $id)
+    {
+        $request->validate([
+            'message' => 'required|string|max:1000',
+        ]);
+
+        $applicant = Applicants::findOrFail($id);
+        $InterviewUser = $applicant->InterviewUser;
+
+        try {
+            Mail::to($applicant->email)->send(new InterviewUserCustomInfoMail($applicant, $request->message));
+
+            // Tandai info sudah dikirim
+            $InterviewUser->info_sent = true;
+            $InterviewUser->save();
+
+            return redirect()->route('admin.interview_user.index')->with('success', 'Notification sent successfully.');
+        } catch (\Exception $e) {
+            Log::error('Failed to send custom info email to applicant_id ' . $id . ' : ' . $e->getMessage());
             return redirect()->back()->with('error', 'Failed to send notification. Please try again.');
         }
     }
