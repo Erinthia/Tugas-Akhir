@@ -78,44 +78,39 @@
                                     @php
                                         $interviewUser = $applicant->interviewUser;
                                     @endphp
-
-                                    @if ($interviewUser && $interviewUser->decision_id != 1)
-                                        @if (in_array($interviewUser->decision_id, [2, 3]))
-                                            @if ($interviewUser->notification_sent)
-                                                @if (!$interviewUser->info_sent)
-                                                    {{-- Jika notifikasi sudah dikirim dan info tambahan belum dikirim --}}
-                                                    <a href="{{ route('admin.interview_user.customEmailForm', $applicant->id) }}"
-                                                        class="btn btn-sm btn-warning">
-                                                        Send Advance Information
-                                                    </a>
-                                                @else
-                                                    {{-- Info sudah dikirim, tombol dinonaktifkan --}}
-                                                    <button class="btn btn-sm btn-secondary" disabled>
-                                                        Information has been sent
-                                                    </button>
-                                                @endif
+                                    @if ($interviewUser && $interviewUser->decision_id == 4)
+                                        {{-- Untuk decision gagal (id 4), tampilkan Send Notification warna merah --}}
+                                        <form action="{{ route('admin.interview_user.sendNotification', $applicant->id) }}"
+                                            method="POST"
+                                            onsubmit="return confirm('Send notification to {{ $applicant->fullname }}?');"
+                                            style="display:inline-block;">
+                                            @csrf
+                                            <button class="btn btn-sm btn-danger" type="submit">
+                                                Send Notification
+                                            </button>
+                                        </form>
+                                    @elseif ($interviewUser && $interviewUser->decision_id != 1)
+                                        {{-- Untuk selain gagal, kirim notif hijau atau lanjut --}}
+                                        @if ($interviewUser->notification_sent)
+                                            @if (!$interviewUser->info_sent)
+                                                <a href="{{ route('admin.interview_user.customEmailForm', $applicant->id) }}"
+                                                    class="btn btn-sm btn-warning">
+                                                    Send Advance Information
+                                                </a>
                                             @else
-                                                {{-- Notifikasi belum dikirim --}}
-                                                <form
-                                                    action="{{ route('admin.interview_user.sendNotification', $applicant->id) }}"
-                                                    method="POST"
-                                                    onsubmit="return confirm('Send notification to {{ $applicant->fullname }}?');"
-                                                    style="display:inline-block;">
-                                                    @csrf
-                                                    <button class="btn btn-sm btn-success" type="submit">
-                                                        Send Notification
-                                                    </button>
-                                                </form>
+                                                <button class="btn btn-sm btn-secondary" disabled
+                                                    title="Info sudah pernah dikirim">
+                                                    Information has been sent
+                                                </button>
                                             @endif
-                                        @elseif ($interviewUser->decision_id == 4)
-                                            {{-- Untuk decision gagal (id 4), tampilkan Send Notification --}}
+                                        @else
                                             <form
                                                 action="{{ route('admin.interview_user.sendNotification', $applicant->id) }}"
                                                 method="POST"
                                                 onsubmit="return confirm('Send notification to {{ $applicant->fullname }}?');"
                                                 style="display:inline-block;">
                                                 @csrf
-                                                <button class="btn btn-sm btn-danger" type="submit">
+                                                <button class="btn btn-sm btn-success" type="submit">
                                                     Send Notification
                                                 </button>
                                             </form>
@@ -125,7 +120,7 @@
                                     @endif
                                 </td>
                                 <td>
-                                    {{ $applicant->offering?->staff?->name ?? '-' }}
+                                    {{ $applicant->InterviewUser?->staff?->name ?? '-' }}
                                 </td>
                             </tr>
                         @endforeach

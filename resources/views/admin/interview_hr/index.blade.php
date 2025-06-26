@@ -77,26 +77,35 @@
 
                                 <td>
                                     @php
-                                        $interview = $applicant->InterviewHR;
+                                        $InterviewHR = $applicant->InterviewHR;
                                     @endphp
 
-                                    @if ($interview && $interview->decision_id != 1)
-                                        @if ($interview->notification_sent)
-                                            @if (!$interview->info_sent)
-                                                {{-- Jika notifikasi sudah dikirim dan info tambahan belum dikirim --}}
+                                    @if ($InterviewHR && $InterviewHR->decision_id == 4)
+                                        {{-- Untuk decision gagal (id 4), tampilkan Send Notification warna merah --}}
+                                        <form action="{{ route('admin.interview_hr.sendNotification', $applicant->id) }}"
+                                            method="POST"
+                                            onsubmit="return confirm('Send notification to {{ $applicant->fullname }}?');"
+                                            style="display:inline-block;">
+                                            @csrf
+                                            <button class="btn btn-sm btn-danger" type="submit">
+                                                Send Notification
+                                            </button>
+                                        </form>
+                                    @elseif ($InterviewHR && $InterviewHR->decision_id != 1)
+                                        {{-- Untuk selain gagal, kirim notif hijau atau lanjut --}}
+                                        @if ($InterviewHR->notification_sent)
+                                            @if (!$InterviewHR->info_sent)
                                                 <a href="{{ route('admin.interview_hr.customEmailForm', $applicant->id) }}"
                                                     class="btn btn-sm btn-warning">
                                                     Send Advance Information
                                                 </a>
                                             @else
-                                                {{-- Info tambahan sudah dikirim --}}
                                                 <button class="btn btn-sm btn-secondary" disabled
                                                     title="Info sudah pernah dikirim">
                                                     Information has been sent
                                                 </button>
                                             @endif
                                         @else
-                                            {{-- Jika notifikasi belum dikirim --}}
                                             <form
                                                 action="{{ route('admin.interview_hr.sendNotification', $applicant->id) }}"
                                                 method="POST"
@@ -112,10 +121,8 @@
                                         <span class="text-muted">-</span>
                                     @endif
                                 </td>
-
-
                                 <td>
-                                    {{ $applicant->offering?->staff?->name ?? '-' }}
+                                    {{ $applicant->InterviewHR?->staff?->name ?? '-' }}
                                 </td>
                             </tr>
                         @endforeach
