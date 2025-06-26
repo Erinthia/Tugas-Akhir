@@ -4,15 +4,15 @@
 
 @section('content')
     <div class="section-header">
-        <h1>HR Interview</h1>
+        <h1>User Interview</h1>
     </div>
     <div class="section-body">
         <div class="section-title-lead-wrapper">
             <div class="section-title">
                 <span class="toggle-indicator inactive"></span>
-                <h2 class="section-title-text">HR Interview Assessment</h2>
+                <h2 class="section-title-text">User Interview Assessment</h2>
             </div>
-            <p class="section-lead">In this section you can editing of the HR Interview.</p>
+            <p class="section-lead">In this section you can editing of the User Interview.</p>
         </div>
         <div class="card" style="min-height: 900px;">
             <div class="card">

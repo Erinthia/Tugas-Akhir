@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="section-header">
-        <h1>InterviewUser</h1>
+        <h1>Interview User</h1>
     </div>
     <div class="section-body">
         @if (session('success'))
@@ -21,10 +21,10 @@
         <div class="section-title-lead-wrapper">
             <div class="section-title">
                 <span class="toggle-indicator inactive"></span>
-                <h2 class="section-title-text">InterviewUser List</h2>
+                <h2 class="section-title-text">Interview User List</h2>
             </div>
             <p class="section-lead">
-                In this section you can manage system InterviewUser data such as editing and show detail.
+                In this section you can manage system Interview User data such as editing and show detail.
             </p>
         </div>
         <div class="card">
