@@ -135,17 +135,19 @@ class OfferingController extends Controller
      */
     public function sendNotification($id)
     {
-        $applicant = Applicants::with('Offering')->findOrFail($id);
-        $Offering = $applicant->Offering;
+        $applicant = Applicants::with('offering')->findOrFail($id);
+        $Offering = $applicant->offering;
 
-        if (!$Offering || !$Offering->benefit || !$Offering->selection_result || !$Offering->deadline_offering || !$Offering->offering_result) {
-            return redirect()->back()->with('error', 'Offering data is incomplete.');
+        // Cek kalau sudah dikirim, tolak pengiriman ulang
+        if ($Offering->notification_sent) {
+            return redirect()->back()->with('error', 'Notification has already been sent.');
         }
 
-        // Anggap semua data offering valid, maka dianggap "lolos"
-        $result = 'lolos';
+        Mail::to($applicant->email)->send(new OfferingResultMail($applicant, $Offering));
 
-        Mail::to($applicant->email)->send(new OfferingResultMail($applicant, $result));
+        // Tandai sudah dikirim
+        $Offering->notification_sent = true;
+        $Offering->save();
 
         return redirect()->back()->with('success', 'Notification sent successfully.');
     }

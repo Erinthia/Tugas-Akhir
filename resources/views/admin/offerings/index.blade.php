@@ -71,15 +71,15 @@
 
                                 <td>
                                     @if (
-                                        $applicant->offering &&
-                                            $applicant->offering->benefit !== '-' &&
-                                            $applicant->offering->selection_result !== '-' &&
-                                            !empty($applicant->offering->deadline_offering) &&
-                                            $applicant->offering->offering_result !== '-')
-                                        @if (!$applicant->offering->notification_sent)
+                                        $applicant->Offering &&
+                                            $applicant->Offering->benefit !== '-' &&
+                                            $applicant->Offering->selection_result !== '-' &&
+                                            !empty($applicant->Offering->deadline_offering) &&
+                                            $applicant->offering->Offering_result !== '-')
+                                        @if (!$applicant->Offering->notification_sent)
                                             <form action="{{ route('admin.offerings.sendNotification', $applicant->id) }}"
                                                 method="POST"
-                                                onsubmit="return confirm('Send notification to {{ $applicant->fullname }}?');">
+                                                onsubmit="return confirm('Kirim notifikasi untuk {{ $applicant->fullname }}?');">
                                                 @csrf
                                                 <button class="btn btn-sm btn-success" type="submit">
                                                     Send Notification
