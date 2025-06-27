@@ -162,44 +162,6 @@
             margin-left: calc(28px + 0.5rem);
             /* Margin kiri sebesar lebar toggle + jaraknya */
         }
-
-        .card {
-            border: 1px solid #e0e0e0;
-            border-radius: 0.25rem;
-            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
-        }
-
-        .table th {
-            background-color: #f8f9fa;
-            border-bottom: 1px solid #dee2e6;
-            font-weight: bold;
-            padding: 0.75rem;
-            vertical-align: middle;
-        }
-
-        .table td {
-            padding: 0.75rem;
-            vertical-align: middle;
-            border-bottom: 1px solid #e9ecef;
-        }
-
-        .btn-primary {
-            background-color: #007bff;
-            border-color: #007bff;
-            color: #fff;
-        }
-
-        .btn-warning {
-            background-color: #ffc107;
-            border-color: #ffc107;
-            color: #212529;
-        }
-
-        .badge {
-            border-radius: 0.25rem;
-            font-size: 0.875rem;
-            padding: 0.35em 0.65em;
-        }
     </style>
 @endpush
 

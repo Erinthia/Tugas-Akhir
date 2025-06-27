@@ -132,5 +132,100 @@
             margin-left: calc(28px + 0.5rem);
             /* Margin kiri sebesar lebar toggle + jaraknya */
         }
+
+        /* Wrapper untuk pagination Laravel bawaan */
+        .custom-pagination-wrapper nav {
+            display: flex;
+            justify-content: right;
+            align-items: right;
+        }
+
+        .custom-pagination-wrapper .page-item {
+            margin: 0 4px;
+            /* Jarak antar tombol */
+        }
+
+        .custom-pagination-wrapper .page-link {
+            display: flex;
+            min-width: 40px;
+            /* Lebar minimum tombol */
+            height: 40px;
+            /* Tinggi tombol */
+            padding: 0;
+            /* Hapus padding default */
+            border-radius: 8px !important;
+            /* Sudut membulat */
+            color: #ffffff !important;
+            /* Warna teks default */
+            background-color: #6a5acd !important;
+            /* Warna latar belakang default */
+            border: 1px solid #6a5acd !important;
+            /* Border tipis */
+            transition: all 0.3s ease;
+            /* Transisi halus untuk hover */
+            font-weight: 500;
+            font-size: 16px;
+            /* Ukuran font untuk angka */
+            line-height: 1;
+            /* Penting untuk memastikan teks/ikon tidak terlalu besar */
+        }
+
+        /* Gaya untuk tombol aktif */
+        .custom-pagination-wrapper .page-item.active .page-link {
+            /* .relative { */
+            background-color: #ffffff !important;
+            border-color: #ffffff !important;
+            color: #6a5acd !important;
+        }
+
+        /* Sembunyikan tombol pagination versi mobile */
+        .flex.justify-between.flex-1.sm\:hidden {
+            display: none !important;
+        }
+
+        .dataTables_info {
+            display: none !important;
+        }
+
+
+        /* Untuk Font Awesome */
+        span.icon,
+        /* Untuk ikon generik */
+        svg
+
+        /* Untuk ikon SVG */
+            {
+            font-size: inherit;
+            /* Mengambil ukuran font dari parent */
+            width: 1em;
+            /* Mengatur ulang lebar */
+            height: 1em;
+            /* Mengatur ulang tinggi */
+            max-width: 100%;
+            /* Batasi agar tidak melebihi parent */
+            max-height: 100%;
+            /* Batasi agar tidak melebihi parent */
+        }
+    </style>
+@endpush
+
+@push('scripts')
+    <script>
+        const searchInput = document.getElementById('search');
+        const searchForm = document.getElementById('searchForm');
+
+        // Submit realtime saat mengetik
+        searchInput.addEventListener('input', function() {
+            searchForm.submit();
+        });
+
+        // Auto-focus HANYA jika sudah ada pencarian sebelumnya
+        @if (!empty($search))
+            window.onload = function() {
+                searchInput.focus();
+                searchInput.setSelectionRange(searchInput.value.length, searchInput.value.length);
+            };
+        @endif
+    </script>
     </style>
 @endpush
