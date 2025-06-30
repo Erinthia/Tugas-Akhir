@@ -498,7 +498,7 @@
             });
 
             if (!found) {
-                alert('Bagian tidak ditemukan!');
+                alert('Section not found. Please try a different keyword!');
             }
         });
     </script>
