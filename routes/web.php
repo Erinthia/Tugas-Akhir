@@ -11,7 +11,6 @@ use App\Http\Controllers\PublicController;
 use App\Http\Controllers\ReportingController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ScreeningCvController;
-use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/', function () {
