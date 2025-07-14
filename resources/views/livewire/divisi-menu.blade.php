@@ -34,38 +34,39 @@
                         </div>
                         <br>
                     @endif
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Description</th>
-                                <th scope="col">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($divisions as $index => $division)
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
                                 <tr>
-                                    <th scope="row">{{ $index + 1 }}</th>
-                                    <td>{{ $division->name }}</td>
-                                    <td>{{ $division->description }}</td>
-                                    <td>
-                                        <div class="buttons">
-                                            <a href="#" wire:click.prevent="update({{ $division->id }})"
-                                                class="btn btn-icon btn-warning"><i class="fas fa-edit"></i></a>
-                                            <a href="#" wire:click.prevent="delete({{ $division->id }})"
-                                                wire:confirm="Are you sure?" class="btn btn-icon btn-danger"><i
-                                                    class="fas fa-times"></i></a>
-                                        </div>
-                                    </td>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Description</th>
+                                    <th scope="col">Action</th>
                                 </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                    {{ $divisions->links() }}
+                            </thead>
+                            <tbody>
+                                @foreach ($divisions as $index => $division)
+                                    <tr>
+                                        <th scope="row">{{ $index + 1 }}</th>
+                                        <td>{{ $division->name }}</td>
+                                        <td>{{ $division->description }}</td>
+                                        <td>
+                                            <div class="buttons">
+                                                <a href="#" wire:click.prevent="update({{ $division->id }})"
+                                                    class="btn btn-icon btn-warning"><i class="fas fa-edit"></i></a>
+                                                <a href="#" wire:click.prevent="delete({{ $division->id }})"
+                                                    wire:confirm="Are you sure?" class="btn btn-icon btn-danger"><i
+                                                        class="fas fa-times"></i></a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                        {{ $divisions->links() }}
+                    </div>
                 </div>
             </div>
-        </div>
     @endif
     @if ($isCreate)
         <div class="section-header">

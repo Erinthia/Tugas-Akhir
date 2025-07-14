@@ -40,144 +40,145 @@
                         </form>
                     </div>
                 </div>
-
-                <table class="table table-striped" id="table1">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Name</th>
-                            <th>Opportunity</th>
-                            <th>Action</th>
-                            <th>Notifikasi</th>
-                            <th>Staff</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($applicants as $index => $applicant)
+                <div class="table-responsive">
+                    <table class="table table-striped" id="table1">
+                        <thead>
                             <tr>
-                                <td>{{ $index + 1 }}</td>
-                                <td>{{ $applicant->fullname }}</td>
-                                <td>{{ $applicant->opportunity->name ?? '-' }}</td>
-                                <td>
-                                    <a href="{{ route('admin.offerings.show', $applicant->id) }}"
-                                        class="btn btn-icon btn-primary">
-                                        <i class="fas fa-eye"></i>
-                                    </a>
-                                    <a href="{{ route('admin.offerings.edit', $applicant->id) }}"
-                                        class="btn btn-icon btn-warning">
-                                        <i class="fas fa-edit"></i>
-                                    </a>
-                                </td>
-
-                                <td>
-                                    @if (
-                                        $applicant->Offering &&
-                                            $applicant->Offering->benefit !== '-' &&
-                                            $applicant->Offering->selection_result !== '-' &&
-                                            !empty($applicant->Offering->deadline_offering) &&
-                                            $applicant->offering->Offering_result !== '-')
-                                        @if (!$applicant->Offering->notification_sent)
-                                            <form action="{{ route('admin.offerings.sendNotification', $applicant->id) }}"
-                                                method="POST"
-                                                onsubmit="return confirm('Kirim notifikasi untuk {{ $applicant->fullname }}?');">
-                                                @csrf
-                                                <button class="btn btn-sm btn-success" type="submit">
-                                                    Send Notification
-                                                </button>
-                                            </form>
-                                        @else
-                                            <button class="btn btn-sm btn-secondary" disabled
-                                                title="Notifikasi sudah dikirim">
-                                                Notification Sent
-                                            </button>
-                                        @endif
-                                    @else
-                                        <span class="text-muted">-</span>
-                                    @endif
-                                </td>
-                                <td>
-                                    {{ $applicant->offering?->staff?->name ?? '-' }}
-                                </td>
-
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Opportunity</th>
+                                <th>Action</th>
+                                <th>Notifikasi</th>
+                                <th>Staff</th>
                             </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            @foreach ($applicants as $index => $applicant)
+                                <tr>
+                                    <td>{{ $index + 1 }}</td>
+                                    <td>{{ $applicant->fullname }}</td>
+                                    <td>{{ $applicant->opportunity->name ?? '-' }}</td>
+                                    <td>
+                                        <a href="{{ route('admin.offerings.show', $applicant->id) }}"
+                                            class="btn btn-icon btn-primary">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                        <a href="{{ route('admin.offerings.edit', $applicant->id) }}"
+                                            class="btn btn-icon btn-warning">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                    </td>
 
-                {{-- Pagination --}}
-                <div class="mt-4">
-                    {{ $applicants->links() }}
+                                    <td>
+                                        @if (
+                                            $applicant->Offering &&
+                                                $applicant->Offering->benefit !== '-' &&
+                                                $applicant->Offering->selection_result !== '-' &&
+                                                !empty($applicant->Offering->deadline_offering) &&
+                                                $applicant->offering->Offering_result !== '-')
+                                            @if (!$applicant->Offering->notification_sent)
+                                                <form
+                                                    action="{{ route('admin.offerings.sendNotification', $applicant->id) }}"
+                                                    method="POST"
+                                                    onsubmit="return confirm('Kirim notifikasi untuk {{ $applicant->fullname }}?');">
+                                                    @csrf
+                                                    <button class="btn btn-sm btn-success" type="submit">
+                                                        Send Notification
+                                                    </button>
+                                                </form>
+                                            @else
+                                                <button class="btn btn-sm btn-secondary" disabled
+                                                    title="Notifikasi sudah dikirim">
+                                                    Notification Sent
+                                                </button>
+                                            @endif
+                                        @else
+                                            <span class="text-muted">-</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        {{ $applicant->offering?->staff?->name ?? '-' }}
+                                    </td>
+
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+
+                    {{-- Pagination --}}
+                    <div class="mt-4">
+                        {{ $applicants->links() }}
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-@endsection
+    @endsection
 
-@push('styles')
-    <style>
-        .section-header {
-            background-color: white;
-            color: rgb(59, 59, 59);
-            font-weight: bold;
-            padding: 1.1rem;
-            vertical-align: middle;
-            height: 80px;
-        }
+    @push('styles')
+        <style>
+            .section-header {
+                background-color: white;
+                color: rgb(59, 59, 59);
+                font-weight: bold;
+                padding: 1.1rem;
+                vertical-align: middle;
+                height: 80px;
+            }
 
-        .section-header h1 {
-            font-size: 24px;
-            line-height: 50px;
-        }
+            .section-header h1 {
+                font-size: 24px;
+                line-height: 50px;
+            }
 
-        .section-title-lead-wrapper {
-            margin-bottom: 1.5rem;
-        }
+            .section-title-lead-wrapper {
+                margin-bottom: 1.5rem;
+            }
 
-        .section-title {
-            display: flex;
-            align-items: center;
-            margin-bottom: 0.75rem;
-            margin-top: 1rem;
-        }
+            .section-title {
+                display: flex;
+                align-items: center;
+                margin-bottom: 0.75rem;
+                margin-top: 1rem;
+            }
 
-        .toggle-indicator {
-            width: 28px;
-            height: 8px;
-            background-color: rgb(122, 138, 227);
-            border-radius: 7.5px;
-            margin-right: 0.5rem;
-        }
+            .toggle-indicator {
+                width: 28px;
+                height: 8px;
+                background-color: rgb(122, 138, 227);
+                border-radius: 7.5px;
+                margin-right: 0.5rem;
+            }
 
-        .section-title-text {
-            font-size: 18px;
-            font-weight: normal;
-            color: #020202;
-            margin-bottom: 0;
-        }
+            .section-title-text {
+                font-size: 18px;
+                font-weight: normal;
+                color: #020202;
+                margin-bottom: 0;
+            }
 
-        .section-lead {
-            font-size: 1rem;
-            color: #868e96;
-            margin-bottom: 0;
-            margin-left: calc(28px + 0.5rem);
-            /* Margin kiri sebesar lebar toggle + jaraknya */
-        }
-    </style>
-@endpush
+            .section-lead {
+                font-size: 1rem;
+                color: #868e96;
+                margin-bottom: 0;
+                margin-left: calc(28px + 0.5rem);
+                /* Margin kiri sebesar lebar toggle + jaraknya */
+            }
+        </style>
+    @endpush
 
-@push('scripts')
-    <script>
-        const searchInput = document.getElementById('search');
-        const searchForm = document.getElementById('searchForm');
+    @push('scripts')
+        <script>
+            const searchInput = document.getElementById('search');
+            const searchForm = document.getElementById('searchForm');
 
-        searchInput.addEventListener('input', function() {
-            searchForm.submit(); // Submit form when input changes
-        });
-    </script>
-    <script>
-        // Auto hide alert after 3 seconds
-        setTimeout(function() {
-            $(".alert").alert('close');
-        }, 3000); // 3000 ms = 1 detik
-    </script>
-@endpush
+            searchInput.addEventListener('input', function() {
+                searchForm.submit(); // Submit form when input changes
+            });
+        </script>
+        <script>
+            // Auto hide alert after 3 seconds
+            setTimeout(function() {
+                $(".alert").alert('close');
+            }, 3000); // 3000 ms = 1 detik
+        </script>
+    @endpush

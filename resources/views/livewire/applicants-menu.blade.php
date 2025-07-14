@@ -29,40 +29,42 @@
                         </div>
                         <br>
                     @endif
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">Phone Number</th>
-                                <th scope="col">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($applicants as $index => $applicant)
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
                                 <tr>
-                                    {{-- <td>{{ $applicant->phone_number }}</td> --}}
-                                    <th scope="row">{{ $index + 1 }}</th>
-                                    <td>{{ $applicant->fullname }}</td>
-                                    <td>{{ $applicant->email }}</td>
-                                    <td>{{ $applicant->phone_number }}</td>
-
-
-                                    <td>
-                                        <div class="buttons">
-                                            <a href="#" wire:click.prevent="show('{{ $applicant->id }}')"
-                                                class="btn btn-icon btn-primary"><i class="fas fa-eye"></i>
-                                                <a href="#" wire:click.prevent="destroy('{{ $applicant->id }}')"
-                                                    wire:confirm="Are you sure?" class="btn btn-icon btn-danger"><i
-                                                        class="fas fa-times"></i></a>
-                                        </div>
-                                    </td>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Phone Number</th>
+                                    <th scope="col">Action</th>
                                 </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                    {{ $applicants->links() }}
+                            </thead>
+                            <tbody>
+                                @foreach ($applicants as $index => $applicant)
+                                    <tr>
+                                        {{-- <td>{{ $applicant->phone_number }}</td> --}}
+                                        <th scope="row">{{ $index + 1 }}</th>
+                                        <td>{{ $applicant->fullname }}</td>
+                                        <td>{{ $applicant->email }}</td>
+                                        <td>{{ $applicant->phone_number }}</td>
+
+
+                                        <td>
+                                            <div class="buttons">
+                                                <a href="#" wire:click.prevent="show('{{ $applicant->id }}')"
+                                                    class="btn btn-icon btn-primary"><i class="fas fa-eye"></i>
+                                                    <a href="#"
+                                                        wire:click.prevent="destroy('{{ $applicant->id }}')"
+                                                        wire:confirm="Are you sure?" class="btn btn-icon btn-danger"><i
+                                                            class="fas fa-times"></i></a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                        {{ $applicants->links() }}
 
 
     @endif

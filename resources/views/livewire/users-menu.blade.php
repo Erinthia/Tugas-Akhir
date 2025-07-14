@@ -26,6 +26,7 @@
                     </button>
                 </div>
             @endif
+
             <div class="card">
                 <div class="card-body">
                     <div class="row">
@@ -39,40 +40,41 @@
                         </div>
                     </div>
                     <br>
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($users as $index => $user)
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
                                 <tr>
-                                    <th scope="row">{{ $index + 1 }}</th>
-                                    <td>{{ $user->name }}</td>
-                                    <td>{{ $user->email }}</td>
-                                    <td>
-                                        <div class="buttons">
-                                            <a href="#" wire:click.prevent="show({{ $user->id }})"
-                                                class="btn btn-icon btn-primary"><i class="fas fa-eye"></i></a>
-                                            <a href="#" wire:click.prevent="edit({{ $user->id }})"
-                                                class="btn btn-icon btn-warning"><i class="fas fa-edit"></i></a>
-                                            <a href="#" wire:click.prevent="destroy({{ $user->id }})"
-                                                wire:confirm="Are you sure?" class="btn btn-icon btn-danger"><i
-                                                    class="fas fa-times"></i></a>
-                                        </div>
-                                    </td>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Action</th>
                                 </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                    {{ $users->links() }}
+                            </thead>
+                            <tbody>
+                                @foreach ($users as $index => $user)
+                                    <tr>
+                                        <th scope="row">{{ $index + 1 }}</th>
+                                        <td>{{ $user->name }}</td>
+                                        <td>{{ $user->email }}</td>
+                                        <td>
+                                            <div class="buttons">
+                                                <a href="#" wire:click.prevent="show({{ $user->id }})"
+                                                    class="btn btn-icon btn-primary"><i class="fas fa-eye"></i></a>
+                                                <a href="#" wire:click.prevent="edit({{ $user->id }})"
+                                                    class="btn btn-icon btn-warning"><i class="fas fa-edit"></i></a>
+                                                <a href="#" wire:click.prevent="destroy({{ $user->id }})"
+                                                    wire:confirm="Are you sure?" class="btn btn-icon btn-danger"><i
+                                                        class="fas fa-times"></i></a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                        {{ $users->links() }}
+                    </div>
                 </div>
             </div>
-        </div>
     @endif
 
     @if ($isCreate)

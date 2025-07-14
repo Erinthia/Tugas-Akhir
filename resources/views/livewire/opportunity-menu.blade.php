@@ -37,7 +37,7 @@
             </div>
             <div class="row">
                 @foreach ($opportunities as $item)
-                    <div class="col-4">
+                    <div class="col-12 col-md-4 mb-4">
                         <div class="card card-info">
                             <div class="card-header">
                                 <h4>{{ $item->name }}</h4>
@@ -86,54 +86,60 @@
             <p class="section-lead">In this section you can show detail of Opportunity.</p>
             <div class="card">
                 <div class="card-body">
-                    <div class="row">
-                        <div class="col-6">
+                    <div class="row flex-column flex-lg-row">
+                        <!-- Bagian Kiri -->
+                        <div class="col-12 col-lg-4 mb-4">
                             <h3>{{ $opportunity->name }}</h3>
                             <p>{{ $opportunity->location }}, {{ $opportunity->schema->name }} | Created Date :
                                 {{ $opportunity->created_at }} <br> Division : {{ $opportunity->division->name }} |
                                 Category : {{ $opportunity->category->name }} <br>Open Date :
                                 {{ $opportunity->start_date }} | Close Date : {{ $opportunity->end_date }}</p>
                         </div>
-                        <div class="col-6">
+
+                        <!-- Bagian Kanan -->
+                        <div class="col-12 col-lg-8">
                             <div class="row">
-                                <div class="col-3 text-center">
+                                <div class="col-6 col-md-3 text-center mb-2">
                                     <div class="alert alert-light">
                                         <p><strong>Jumlah Click</strong></p>
                                         <h4>{{ $opportunity->clicked }}</h4>
                                     </div>
                                 </div>
-                                <div class="col-3 text-center">
+                                <div class="col-6 col-md-3 text-center mb-2">
                                     <div class="alert alert-light">
                                         <p><strong>Jumlah Applicant</strong></p>
                                         <h4>{{ $opportunity->applicants->count() }}</h4>
                                     </div>
                                 </div>
-                                <div class="col-3 text-center">
+                                <div class="col-6 col-md-3 text-center mb-2">
                                     <div class="alert alert-light">
                                         <p><strong>Jumlah Quota</strong></p>
                                         <h4>{{ $opportunity->quota }}</h4>
                                     </div>
                                 </div>
-                                <div class="col-3 text-center">
+                                <div class="col-6 col-md-3 text-center mb-2">
                                     <a href="#" wire:click.prevent="home()"
-                                        class="btn btn-sm btn-block btn-outline-primary icon-left"><i
-                                            class="fas fa-arrow-left"></i> Back</a>
+                                        class="btn btn-sm btn-block btn-outline-primary icon-left mb-1">
+                                        <i class="fas fa-arrow-left"></i> Back
+                                    </a>
                                     <a href="#" wire:click.prevent="information('{{ $opportunity->id }}')"
-                                        class="btn btn-sm btn-block btn-outline-dark icon-left"><i
-                                            class="fas fa-info-circle"></i> Detail</a>
+                                        class="btn btn-sm btn-block btn-outline-dark icon-left mb-1">
+                                        <i class="fas fa-info-circle"></i> Detail
+                                    </a>
                                     <a href="#" wire:click.prevent="update('{{ $opportunity->id }}')"
-                                        class="btn btn-sm btn-block btn-outline-warning icon-left"><i
-                                            class="far fa-edit"></i> Update</a>
+                                        class="btn btn-sm btn-block btn-outline-warning icon-left mb-1">
+                                        <i class="far fa-edit"></i> Update
+                                    </a>
                                     <a href="#"
                                         onclick="if(confirm('Are you sure?')) @this.call('destroy', '{{ $opportunity->id }}')"
                                         class="btn btn-sm btn-block btn-outline-danger icon-left">
                                         <i class="fas fa-times"></i> Delete
                                     </a>
-
                                 </div>
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
