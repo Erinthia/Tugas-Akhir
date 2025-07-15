@@ -68,7 +68,6 @@
                                             <i class="fas fa-edit"></i>
                                         </a>
                                     </td>
-
                                     <td>
                                         @if (
                                             $applicant->Offering &&
